@@ -19,25 +19,29 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "saga_instance")
+@Table(name = "saga_step")
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class SagaInstance {
+/*
+    -> The Saga Step tracks individual units of work or tasks that make up the overall saga
+    -> If a saga fails, the history of individual steps tells the orchestrator precisely
+    which microservices need to be rolled back and which ones haven't been touched yet.
+*/
+
+public class SagaStep {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
+    @Column(name = "saga_instance_id", nullable = false)
+    private Long sagaInstanceId;
+
+    @Column(name = "step_name", nullable = false)
+    private String stepName; // step name/identifier
+
     @Column(name = "status", nullable = false)
-    private StepStatus status=StepStatus.STARTED; // overall status
-
-    @Type(JsonType.class)
-    @Column(name = "context", columnDefinition = "json")
-    private String context; // initial data needed for the transaction.
-
-    @Column(name = "current_step", nullable = false)
-    private String currentStep; // current step/state pointer
+    private StepStatus status; // status of that specific step
 
 }
