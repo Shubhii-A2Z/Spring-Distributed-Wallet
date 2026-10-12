@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.example.shardedsagawallet.enums.StepStatus;
 import com.example.shardedsagawallet.models.SagaInstance;
 import com.example.shardedsagawallet.repositories.SagaInstanceRepository;
+import com.example.shardedsagawallet.services.saga.factories.SagaStepFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ public class SagaOrchestratorImpl implements SagaOrchestrator{
 
     private final ObjectMapper objectMapper;
     private final SagaInstanceRepository sagaInstanceRepository;
+    private final SagaStepFactory sagaStepFactory;
     
     @Override
     public Long startSaga(SagaContext context){
@@ -38,6 +40,8 @@ public class SagaOrchestratorImpl implements SagaOrchestrator{
 
     @Override
     public boolean executeStep(Long sagaInstanceId, String stepName){
+        SagaStep sagaStep=this.sagaStepFactory.getSagaStep(stepName);
+        
         return true;
     }
 

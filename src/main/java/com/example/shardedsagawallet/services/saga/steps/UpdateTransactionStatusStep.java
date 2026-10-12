@@ -2,6 +2,7 @@ package com.example.shardedsagawallet.services.saga.steps;
 
 import org.springframework.stereotype.Service;
 
+import com.example.shardedsagawallet.enums.SagaStepType;
 import com.example.shardedsagawallet.enums.TransactionStatus;
 import com.example.shardedsagawallet.models.Transaction;
 import com.example.shardedsagawallet.repositories.TransactionRepository;
@@ -51,7 +52,7 @@ public class UpdateTransactionStatusStep implements SagaStep{
 
     @Override
     public String getStepName(){
-        return "UpdateTransactionStatusStep";
+        return SagaStepType.UPDATE_TRANSACTION_STATUS_STEP.toString();
     }
     
 }

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
 
+import com.example.shardedsagawallet.enums.SagaStepType;
 import com.example.shardedsagawallet.models.Wallet;
 import com.example.shardedsagawallet.repositories.WalletRepository;
 import com.example.shardedsagawallet.services.saga.SagaContext;
@@ -62,7 +63,7 @@ public class CreditDestinationWalletStep implements SagaStep{
 
     @Override
     public String getStepName(){
-        return "CreditDestinationWalletStep";
+        return SagaStepType.CREDIT_DESTINATION_WALLET_STEP.toString();
     }
 
 }
